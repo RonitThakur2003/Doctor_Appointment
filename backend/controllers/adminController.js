@@ -8,9 +8,9 @@ import userModel from "../models/userModel.js"
 
 const addDoctor = async(req,res) => {
     try {      
-        const { name, email, password, speciality, degree, experiance, about, fees, address } = req.body
+        const { name, email, password, speciality, degree, experience, about, fees, address } = req.body
         const imageFile = req.file
-        if(!name || !email || !password || !speciality || !degree || !experiance || !about || !fees || !address){
+        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address){
             return res.json({success:false, message:"Missing Details"})
         }
 
@@ -35,7 +35,7 @@ const addDoctor = async(req,res) => {
             password:hashedPassword,
             speciality,
             degree,
-            experiance,
+            experience,
             about,
             fees,
             address:JSON.parse(address),
