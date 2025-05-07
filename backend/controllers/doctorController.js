@@ -150,6 +150,13 @@ const updateDoctorProfile = async(req,res) => {
 const getPatientData = async(req, res) => {
     try {
         const { patientName, phNumber, date, time, email } = req.body;
+
+        if (!patientName || !phNumber || !date || !time) {
+            return res.status(400).json({
+                success: false,
+                message: 'Missing required fields'
+            });
+        }
         
         // Create new appointment using the correct model
         const newAppointment = await addAppointmentModel.create({
@@ -157,7 +164,7 @@ const getPatientData = async(req, res) => {
             phNumber,
             date,
             time,
-            email
+            email : email || ''
         });
 
         res.json({ 

@@ -12,24 +12,25 @@ const AddApointment = () => {
     const [phNumber , setPHnumber] = useState("");
     const [date , setDate] = useState("");
 
+    const appointmentData = {
+        patientName,
+        phNumber,
+        date,
+        time,
+        email
+    };
+
     const onSubmitHandler = async(event) => {
         event.preventDefault();
         try {
             const { data } = await axios.post(
-                `${backendUrl}/api/doctor/add-appointment`,
-                {
-                    patientName,
-                    phNumber,
-                    date,
-                    time,
-                    email
-                },
+                `${backendUrl}/api/doctor/add-appointment`, appointmentData,
                 { headers: { dToken } }
             );
     
             if (data.success) {
                 toast.success(data.message);
-                // Reset form
+                // Reset form,
                 setPatientName('');
                 setEmail('');
                 setPHnumber('');
@@ -68,7 +69,13 @@ const AddApointment = () => {
                     </div>
                     <div className='flex-1 flex flex-col gap-1'>
                         <p>Date</p>
-                        <input onChange={(e) => setDate(e.target.value)} value={date} className='border rounded px-3 py-2' type="date" required />
+                        <input 
+    onChange={(e) => setDate(e.target.value)} 
+    value={date} 
+    className='border rounded px-3 py-2' 
+    type="date" 
+    required 
+/>
                     </div>
                 </div>
                 <button type='submit' className='bg-primary px-10 py-3 mt-4 text-white rounded-full' onClick={onSubmitHandler}>Add Patient</button>
