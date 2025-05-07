@@ -193,8 +193,8 @@ const cancelAppointment = async (req, res) => {
 }
 
 const razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
+    key_id:process.env.RAZORPAY_KEY_ID,
+    key_secret:process.env.RAZORPAY_KEY_SECRET
 })
 
 const paymentRazorpay = async (req, res) => {
@@ -213,6 +213,8 @@ const paymentRazorpay = async (req, res) => {
         }
         const order = await razorpayInstance.orders.create(options)
         res.json({ success: true, order })
+
+        console.log(order)
 
     } catch (error) {
         console.error("Error creating Razorpay order:", error);
