@@ -12,6 +12,6 @@ doctorRouter.post('/cancel-appointment',authDoctor,appointmentCancel)
 doctorRouter.get('/dashboard',authDoctor,doctorDashboard)
 doctorRouter.get('/profile',authDoctor,doctorProfile)
 doctorRouter.post('/update-profile', authDoctor, updateDoctorProfile)
-doctorRouter.post('/getPatientData',authDoctor ,getPatientData)
+doctorRouter.post('/add-appointment',authDoctor,getPatientData)
 
 export default doctorRouter

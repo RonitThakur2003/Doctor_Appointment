@@ -2,7 +2,8 @@ import doctorModel from "../models/doctorModel.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import appointmentModel from "../models/appointmentModel.js"
-import patient from "../models/patientModel.js"
+
+import addAppointmentModel from "../models/addAppointmentModel.js"
 
 const changeAvailability = async (req,res) =>{
     try {
@@ -146,14 +147,30 @@ const updateDoctorProfile = async(req,res) => {
     }
 }
 
-const getPatientData = async(req , res) => {
+const getPatientData = async(req, res) => {
     try {
-        const {patientId , patientName , phNumber , time , date , email} = req.body
-        await patient.findById ,({patientName ,patientId , phNumber , date , time , email})
-        req.json({success:true , message : 'Appointment'})
+        const { patientName, phNumber, date, time, email } = req.body;
+        
+        // Create new appointment using the correct model
+        const newAppointment = await addAppointmentModel.create({
+            patientName,
+            phNumber,
+            date,
+            time,
+            email
+        });
+
+        res.json({ 
+            success: true, 
+            message: 'Appointment added successfully',
+            appointment: newAppointment
+        });
     } catch(error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
+        console.log(error);
+        res.json({
+            success: false,
+            message: error.message
+        });
     }
 }
 

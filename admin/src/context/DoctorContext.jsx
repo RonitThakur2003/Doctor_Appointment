@@ -93,7 +93,7 @@ const DoctorContextProvider = (props)=>{
 
     const getPatientData = async() => {
         try {
-            const {data} = await axios.post(backendUrl + '/api/doctor/addappointment',formData,{headers:{dToken}})
+            const {data} = await axios.post(backendUrl + '/api/doctor/add-appointment',formData,{headers:{dToken}})
             if(data.success){
                 setPatientData(data.patientData)
                 console.log(data.patientData);
